@@ -33,10 +33,17 @@ jobs:
       - name: Update data (free public RPCs, no secrets)
         run: node scripts/update.mjs
 
-      - name: Commit data if changed
+      - name: Commit data if materially changed
+        # The deployed site always gets the fresh data. The repo only gets a commit when the
+        # fingerprint (pool total, pending count/amount, event count) changes, or every 6h as a heartbeat.
         run: |
           git config user.name  'StakeWatch'
           git config user.email 'stakewatch@users.noreply.github.com'
+          NEW=$(jq -r '.fingerprint // ""' data/latest.json)
+          OLD=$(git show HEAD:data/latest.json 2>/dev/null | jq -r '.fingerprint // ""' || true)
+          LAST=$(git log -1 --format=%ct -- data/latest.json || echo 0)
+          AGE=$(( $(date +%s) - ${LAST:-0} ))
+          if [ "$NEW" = "$OLD" ] && [ "$AGE" -lt 21600 ]; then echo "No material change (age ${AGE}s), skipping commit"; exit 0; fi
           git add data/latest.json data/history.json data/cache/
           if git diff --cached --quiet; then echo "No data changes"; exit 0; fi
           git commit -m "data: update $(date -u +%Y-%m-%dT%H:%MZ)"

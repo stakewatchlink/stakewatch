@@ -1,4 +1,5 @@
 [
 {"t":"2026-10-19T04:43:54.735Z","block":26224298,"staked":40875000,"max":40875000,"available":0,"pendingCount":603,"pendingLink":7702172.398287357,"pendingExCohort":1807172.3982882607,"refillMedianS":12,"linkUsd":12.131025894334725,"stlinkPerLink":1.0009787475424166,"stakelinkTvlUsd":88033564.85587586},
-{"t":"2026-10-19T04:46:28.740Z","block":26224323,"staked":40875000,"max":40875000,"available":0,"pendingCount":603,"pendingLink":7702172.398287357,"pendingExCohort":1807172.3982882607,"refillMedianS":12,"linkUsd":12.147713493343447,"stlinkPerLink":0.9996036795541574,"stakelinkTvlUsd":88033564.85587586}
+{"t":"2026-10-19T04:46:28.740Z","block":26224323,"staked":40875000,"max":40875000,"available":0,"pendingCount":603,"pendingLink":7702172.398287357,"pendingExCohort":1807172.3982882607,"refillMedianS":12,"linkUsd":12.147713493343447,"stlinkPerLink":0.9996036795541574,"stakelinkTvlUsd":88033564.85587586},
+{"t":"2026-10-19T04:48:42.098Z","block":26224334,"staked":40875000,"max":40875000,"available":0,"pendingCount":603,"pendingLink":7702172.398287357,"pendingExCohort":1807172.3982882607,"refillMedianS":12,"linkUsd":12.147713493343447,"stlinkPerLink":0.9996036795541574,"stakelinkTvlUsd":88033564.85587586}
 ]

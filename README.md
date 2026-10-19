@@ -54,6 +54,9 @@ No secrets are needed, because only free public RPCs and APIs are used. Notes:
 * GitHub disables schedules after 60 days without repo activity. The data commits count as activity.
 * On a **private** repo, about 72 runs a day uses roughly 2,000+ Actions minutes a month, which is more than the free tier. A public repo is free, or you can lower the cadence.
 * Commits made with `GITHUB_TOKEN` don't re-trigger the workflow, so there's no loop.
+* Commit noise: every run deploys fresh data to Pages, but the repo only gets a data commit when the fingerprint (pool total, pending count and amount, event count) changes, or every 6h. `history.json` therefore gains one row per data commit.
+
+Live: https://stakewatchlink.github.io/stakewatch/
 
 Local cron alternative:
 ```cron
@@ -63,7 +66,6 @@ Local cron alternative:
 ## TODO before launch
 * Newsletter provider for the weekly report form (`#TODO-newsletter-endpoint`)
 * Sponsor slot, Ledger affiliate URL (`#TODO-ledger-affiliate-link`)
-* Replace `USERNAME` in the canonical and OG tags
 * The direct reward rate (4.32%) is a manual reference
 
 Not financial advice.

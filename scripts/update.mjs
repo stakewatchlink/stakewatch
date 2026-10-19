@@ -277,6 +277,8 @@ async function market() {
     market: { ...mk, directRewardRatePct: REFERENCE_REWARD_RATE, directRewardRateSource: 'staking.chain.link (manual reference)' },
     scan: { fromBlock: firstScanned, toBlock: lastScanned, events: events.length, seconds: (Date.now() - t0) / 1000 },
   };
+  // "Material" fingerprint: CI only commits when this changes (or on a periodic heartbeat).
+  latest.fingerprint = [community.totalPrincipal, community.maxPoolSize, pend.length, Math.round(latest.pending.totalLink), events.length].join('|');
   atomic(path.join(DATA, 'latest.json'), JSON.stringify(latest));
   const histFile = path.join(DATA, 'history.json');
   const hist = readJSON(histFile, []);
