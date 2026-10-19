@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StakeWatch: Is the Chainlink LINK staking pool full? An honest tracker</title>
+<meta name="description" content="The Chainlink staking v0.2 community pool is full and freed space is re-staked within seconds. Live pool status, refill speed, weekly unlock forecast and your realistic options: wait, stLINK or hold.">
+<meta name="keywords" content="Chainlink staking full, LINK staking pool, staking v0.2 community pool, stLINK, stake.link, LINK unstake cooldown, LINK staking bots">
+<!-- TODO: replace USERNAME once the GitHub Pages URL / custom domain is known -->
+<link rel="canonical" href="https://USERNAME.github.io/stakewatch/">
+<meta name="theme-color" content="#0b0f17">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StakeWatch">
+<meta property="og:title" content="StakeWatch: the honest picture of LINK staking v0.2">
+<meta property="og:description" content="The pool is full and openings are re-staked in seconds. See the real numbers and the realistic routes in.">
+<meta property="og:url" content="https://USERNAME.github.io/stakewatch/">
+<meta property="og:image" content="https://USERNAME.github.io/stakewatch/preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StakeWatch: is the LINK staking pool really opening?">
+<meta name="twitter:description" content="Pool status, how fast openings get taken, weekly unlock forecast and realistic options.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"StakeWatch","description":"Independent, honest tracker for the Chainlink LINK staking v0.2 community pool"}</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap row">
+    <a class="brand" href="./">⬡ StakeWatch</a>
+    <nav><a href="#speed">Refill speed</a><a href="#forecast">Forecast</a><a href="#options">Your options</a><a href="#faq">FAQ</a><a href="#alerts" class="btn sm">Weekly report</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. Pool status -->
+  <section class="hero card">
+    <div class="eyebrow">Chainlink Staking v0.2 · Community Pool · live on-chain</div>
+    <div class="hero-grid">
+      <div>
+        <div id="status" class="status">Loading…</div>
+        <div class="bar"><div id="fill" class="fill" style="width:0"></div></div>
+        <div class="sub" id="staked-line">–</div>
+        <p class="lede" id="lede">The pool is capped. LINK only gets in when someone withdraws, and that space is usually re-staked within seconds, mostly by automated bots.</p>
+        <div class="updated" id="updated"></div>
+      </div>
+      <div class="hero-side">
+        <div class="kv"><span>Open space</span><b id="h-open">–</b></div>
+        <div class="kv"><span>Per-address limit</span><b id="h-lim">–</b></div>
+        <div class="kv"><span>Cooldown / claim window</span><b id="h-cd">–</b></div>
+        <div class="kv"><span>Pending unstakes (all)</span><b id="h-pend">–</b></div>
+        <div class="kv"><span>…excl. rolling 15k cohort</span><b id="h-pend-x">–</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Refill speed -->
+  <section id="speed" class="card">
+    <div class="h"><h2>How fast do openings get taken?</h2><span class="muted" id="speed-sub">last 30 days, on-chain</span></div>
+    <div class="stats4">
+      <div class="stat big"><span class="k">Median refill time</span><span class="v" id="r-med">–</span><span class="s">from a withdrawal to the next stake</span></div>
+      <div class="stat big"><span class="k">90th percentile</span><span class="v" id="r-p90">–</span><span class="s" id="r-max">–</span></div>
+      <div class="stat big"><span class="k">Refilled within 60s</span><span class="v" id="r-60">–</span><span class="s" id="r-n">–</span></div>
+      <div class="stat big"><span class="k">LINK withdrawn vs re-staked</span><span class="v" id="r-flow">–</span><span class="s" id="r-flow-s">–</span></div>
+    </div>
+    <p class="note">What this means: an opening lasts about one Ethereum block (~12s). Unless you run a bot that watches the mempool or every block, you will almost never get a direct spot by refreshing a page or reacting to an alert. Times are estimated from block numbers (12s per block).</p>
+  </section>
+
+  <!-- 3. Weekly unlock forecast -->
+  <section id="forecast" class="card">
+    <div class="h"><h2>Weekly unlock forecast</h2><span class="muted">LINK whose 28-day cooldown ends, so it <i>could</i> be withdrawn</span>
+      <div class="toggle" role="group" aria-label="Forecast view">
+        <button id="t-ex" class="on" aria-pressed="true">Excluding cohort</button><button id="t-all" aria-pressed="false">Including cohort</button>
+      </div>
+    </div>
+    <div id="wchart" class="chart" role="img" aria-label="Weekly unlock forecast bar chart"></div>
+    <div class="legend"><span><i class="sw others"></i>Other stakers</span><span><i class="sw cohort"></i>Rolling 15k cohort</span><span><i class="sw exp"></i>Expected to actually withdraw (historical rate)</span></div>
+    <div class="tblwrap"><table class="tbl" id="wtbl"><thead><tr><th>Window</th><th>All pending</th><th>Excl. cohort</th><th>Likely withdrawn*</th></tr></thead><tbody></tbody></table></div>
+    <div class="callout">
+      <b>About the recurring 15,000-LINK cohort.</b> <span id="cohort-txt">–</span>
+    </div>
+    <p class="note">*Likely withdrawn = non-cohort unlocks × the share of non-cohort unstake requests that actually withdrew over the scan window (<span id="ft-rate">–</span>). This is a rough guide, not a promise. Whatever does get withdrawn is re-staked within seconds (see above).</p>
+    <details><summary>Soonest individual unlocks</summary><div class="tblwrap"><table class="tbl" id="pending-tbl"><thead><tr><th>Unlocks</th><th>LINK</th><th>Status</th><th>Staker</th></tr></thead><tbody></tbody></table></div></details>
+  </section>
+
+  <!-- 4. Realistic options -->
+  <section id="options" class="card options">
+    <div class="h"><h2>Your realistic options</h2><span class="muted">if you hold LINK and want staking rewards today</span></div>
+    <div class="opts">
+      <article class="opt">
+        <div class="opt-h"><span class="badge bad">Hard</span><h3>Wait for a direct spot</h3></div>
+        <ul>
+          <li>Rate: <b id="o-direct">–</b> (official pool)</li>
+          <li>Openings last <b id="o-med">–</b> (median) and are taken mostly by bots</li>
+          <li>Needs automation, gas and luck. A manual transaction rarely lands in time</li>
+          <li>Exit: 28-day cooldown, then a 7-day claim window</li>
+        </ul>
+        <p class="verdict">Realistic only if you run your own monitoring and transaction bot.</p>
+      </article>
+      <article class="opt">
+        <div class="opt-h"><span class="badge ok">Available now</span><h3>stLINK (stake.link)</h3></div>
+        <ul>
+          <li>APY: <b id="o-st">–</b> (DefiLlama)</li>
+          <li><b>Mint</b>: deposit LINK at stake.link. Deposits can queue if stake.link's own capacity is full, so check the app</li>
+          <li><b>Buy</b>: swap for stLINK on a DEX. Right now 1 stLINK ≈ <b id="o-peg">–</b> LINK</li>
+          <li>Adds stake.link contract risk and price risk vs LINK. Exit by swapping (at market price) or through stake.link's withdrawal process</li>
+        </ul>
+        <p class="verdict">The practical route to staking yield today, if you accept the extra risk.</p>
+      </article>
+      <article class="opt">
+        <div class="opt-h"><span class="badge mid">Simple</span><h3>Just hold LINK</h3></div>
+        <ul>
+          <li>Yield: 0% (or about <b id="o-aave">–</b> lending on Aave v3)</li>
+          <li>Instant liquidity, no cooldown</li>
+          <li>No extra smart-contract risk if self-custodied</li>
+          <li>You miss staking rewards</li>
+        </ul>
+        <p class="verdict">Fine if you value liquidity and simplicity over a few percent.</p>
+      </article>
+    </div>
+    <div class="tblwrap"><table class="tbl cmp">
+      <thead><tr><th></th><th>Direct v0.2 pool</th><th>stLINK</th><th>Hold LINK</th></tr></thead>
+      <tbody>
+        <tr><td>Can you start today?</td><td id="c-open">–</td><td>Yes (buy), maybe queued (mint)</td><td>Yes</td></tr>
+        <tr><td>Reward rate</td><td id="c-direct">–</td><td id="c-st">–</td><td>0%</td></tr>
+        <tr><td>1,000 LINK after 1 year*</td><td id="c-1y-d">–</td><td id="c-1y-s">–</td><td>1,000 LINK</td></tr>
+        <tr><td>Time to exit</td><td>28d cooldown + 7d claim</td><td>Minutes via DEX swap</td><td>Instant</td></tr>
+        <tr><td>Extra risk</td><td>Chainlink staking contracts</td><td>+ stake.link contracts, peg/liquidity</td><td>Custody only</td></tr>
+        <tr><td>Size</td><td id="c-tvl-d">–</td><td id="c-tvl-s">–</td><td>–</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">*Simple illustration at today's rates, before gas and price changes. Rates change. LINK price: <b id="link-px">–</b>. The direct rate is a manual reference from staking.chain.link.</p>
+  </section>
+
+  <!-- 5. Alerts -->
+  <section id="alerts" class="card alerts">
+    <div>
+      <h2>Get the weekly StakeWatch report + big-unlock alerts</h2>
+      <p class="muted">One short email a week with pool status, refill speed and next week's unlocks, plus an alert when an unusually large non-cohort unlock is coming. No hype.</p>
+    </div>
+    <!-- TODO: newsletter provider not chosen yet. Replace action with provider endpoint (e.g. Buttondown/Beehiiv/ConvertKit). -->
+    <form class="signup" action="#TODO-newsletter-endpoint" method="post" onsubmit="event.preventDefault();this.querySelector('.msg').textContent='Signup not live yet (TODO: newsletter provider).'">
+      <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+      <button class="btn" type="submit">Subscribe</button>
+      <span class="msg muted"></span>
+      <span class="todo">TODO: form not connected. Pick a newsletter provider.</span>
+    </form>
+  </section>
+
+  <!-- 6. Activity -->
+  <section id="activity" class="card">
+    <div class="h"><h2>Recent pool activity</h2><span class="muted">latest on-chain events</span></div>
+    <ul id="activity-list" class="feed"></ul>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section id="faq" class="card">
+    <div class="h"><h2>FAQ</h2></div>
+    <details open><summary>Is the community pool full?</summary><p>Yes. It is capped at 40,875,000 LINK and has been full. New LINK can only be staked when an existing staker withdraws, and each address can stake 1 to 15,000 LINK.</p></details>
+    <details><summary>Will an alert help me get a spot?</summary><p>Honestly, rarely. Freed space is usually re-staked in the same or next block. Alerts help you track the pool, but they can't beat bots. Our big-unlock alerts are for staying informed, not for a guaranteed entry.</p></details>
+    <details><summary>Why do so many 15,000-LINK unstakes never happen?</summary><p>Hundreds of max-size addresses start the unstake cooldown on a staggered weekly schedule, let their claim windows expire, then start again. This looks like a holder keeping a standing exit option open, not an intention to leave. Each cycle is 28 + 7 = 35 days, so five weekly groups repeat. We show the forecast with and without them.</p></details>
+    <details><summary>How does withdrawing work?</summary><p>A staker calls <code>unbond</code>, waits a 28-day cooldown, then has a 7-day claim window to <code>unstake</code>. If they don't claim, the LINK stays staked and the cooldown has to start over.</p></details>
+    <details><summary>How do I stake directly if space opens?</summary><p>Through <a href="https://staking.chain.link/" rel="noopener" target="_blank">staking.chain.link</a>, or by following the <a href="https://github.com/smartcontractkit/chainlink-staking-v0.2-public-guide" target="_blank" rel="noopener">official guide</a> (LINK <code>transferAndCall</code> to <code>0xBc10f2E8…DFCDB5e</code>). Always verify the contract address.</p></details>
+    <details><summary>Is stLINK the same as staking?</summary><p>No. stLINK is stake.link's liquid staking token. You get exposure to staking rewards through stake.link's contracts, which adds its own risks, and stLINK can trade above or below 1 LINK.</p></details>
+  </section>
+
+  <div class="grid2">
+    <aside class="card sponsor">
+      <span class="tag">Sponsor</span>
+      <div class="ph">Your project here<br><small class="muted">TODO: sponsor slot placeholder, contact link TBD</small></div>
+    </aside>
+    <aside class="card aff">
+      <span class="tag">Affiliate · disclosed</span>
+      <p><b>Holding LINK? Keep it on a hardware wallet.</b> Ledger devices work with staking.chain.link and DeFi apps through browser wallets.</p>
+      <a class="btn ghost" href="#TODO-ledger-affiliate-link" rel="sponsored nofollow noopener">Get a Ledger →</a>
+      <p class="disc">Disclosure: this is an affiliate link. StakeWatch may earn a commission at no extra cost to you. (TODO: insert real affiliate URL)</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="wrap foot">
+  <p><b>Not financial advice.</b> StakeWatch is an independent tracker and is not affiliated with Chainlink Labs or stake.link. Data comes from Ethereum mainnet via free public RPCs, plus DefiLlama and CoinGecko. It may be delayed or wrong. Cohort and forecast figures are heuristics. Verify on-chain before acting.</p>
+  <p class="muted">Community pool <a href="https://etherscan.io/address/0xBc10f2E862ED4502144c7d632a3459F49DFCDB5e" target="_blank" rel="noopener">0xBc10f2E8…DFCDB5e</a> · data block <span id="blk">–</span> · <a href="data/latest.json">raw JSON</a></p>
+</footer>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

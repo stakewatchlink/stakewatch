@@ -1,0 +1,67 @@
+name: Update data & deploy
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'   # GitHub runs schedules best-effort; delays of several minutes are normal
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write   # commit data/*.json + scan cache
+  pages: write      # deploy to GitHub Pages
+  id-token: write
+
+concurrency:
+  group: stakewatch-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25   # incremental run ~20-40s; cold 90-day scan ~3 min
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Update data (free public RPCs, no secrets)
+        run: node scripts/update.mjs
+
+      - name: Commit data if changed
+        run: |
+          git config user.name  'StakeWatch'
+          git config user.email 'stakewatch@users.noreply.github.com'
+          git add data/latest.json data/history.json data/cache/
+          if git diff --cached --quiet; then echo "No data changes"; exit 0; fi
+          git commit -m "data: update $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "push failed" && exit 1
+
+      - name: Build Pages artifact
+        run: |
+          mkdir -p _site/data
+          cp -r index.html assets .nojekyll preview.png _site/
+          cp data/latest.json data/history.json _site/data/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
