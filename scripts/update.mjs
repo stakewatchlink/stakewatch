@@ -143,13 +143,24 @@ async function pendingUnstakes(events, head, nowTs, unbondingSec, claimSec) {
   const lastStart = {};
   for (const e of events) if (e.name === 'UnbondingPeriodStarted') lastStart[e.staker] = e;
   const candidates = Object.values(lastStart).filter(e => e.block >= minBlock);
-  const c = s => withRpc(async p => {
-    const k = new ethers.Contract(COMMUNITY_POOL, abi, p);
-    const [ub, cl, pr] = await Promise.all([k.getUnbondingEndsAt(s), k.getClaimPeriodEndsAt(s), k.getStakerPrincipal(s)]);
-    return { ub: Number(ub), cl: Number(cl), pr: fmt(pr) };
-  }, 'staker ' + s);
-  const rows = await pmap(candidates, CONCURRENCY, async st => {
-    const r = await c(st.staker);
+  // Batch per-staker reads through Multicall3 (3 calls/staker, 150 stakers per eth_call) to stay
+  // under free-RPC rate limits (GitHub runner IPs get throttled on hundreds of single calls).
+  const MC = new ethers.Interface(['function aggregate3((address target,bool allowFailure,bytes callData)[] calls) view returns ((bool success,bytes returnData)[])']);
+  const MC_ADDR = '0xcA11bde05977b3631167028862bE2a173976CA11';
+  const read = {};
+  for (let i = 0; i < candidates.length; i += 150) {
+    const batch = candidates.slice(i, i + 150);
+    const calls = batch.flatMap(st => ['getUnbondingEndsAt', 'getClaimPeriodEndsAt', 'getStakerPrincipal']
+      .map(f => ({ target: COMMUNITY_POOL, allowFailure: false, callData: iface.encodeFunctionData(f, [st.staker]) })));
+    const ret = await withRpc(async p => MC.decodeFunctionResult('aggregate3',
+      await p.call({ to: MC_ADDR, data: MC.encodeFunctionData('aggregate3', [calls]) }))[0], 'multicall');
+    batch.forEach((st, j) => {
+      const v = k => BigInt(ret[j * 3 + k].returnData);
+      read[st.staker] = { ub: Number(v(0)), cl: Number(v(1)), pr: fmt(v(2)) };
+    });
+  }
+  const rows = candidates.map(st => {
+    const r = read[st.staker];
     if (!r.ub || r.pr === 0 || r.cl < nowTs) return null; // reset / fully unstaked / claim window expired
     return { staker: st.staker, principal: r.pr, unbondingEndsAt: r.ub, claimPeriodEndsAt: r.cl,
       status: r.ub <= nowTs ? 'claimable' : 'cooling', startedBlock: st.block, startedAt: nowTs - (head - st.block) * BLOCK_SEC, tx: st.tx };
