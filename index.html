@@ -26,7 +26,7 @@
 <header class="top">
   <div class="wrap row">
     <a class="brand" href="./">⬡ StakeWatch</a>
-    <nav><a href="#speed">Refill speed</a><a href="#forecast">Forecast</a><a href="#options">Your options</a><a href="#faq">FAQ</a><a href="#alerts" class="btn sm">Weekly report</a></nav>
+    <nav><a href="#speed">Refill speed</a><a href="#forecast">Forecast</a><a href="#options">Your options</a><a href="#faq">FAQ</a><a href="#alerts" class="btn sm">Get alerts</a></nav>
   </div>
 </header>
 
@@ -136,13 +136,10 @@
       <h2>Get the weekly StakeWatch report + big-unlock alerts</h2>
       <p class="muted">One short email a week with pool status, refill speed and next week's unlocks, plus an alert when an unusually large non-cohort unlock is coming. No hype.</p>
     </div>
-    <!-- TODO: newsletter provider not chosen yet. Replace action with provider endpoint (e.g. Buttondown/Beehiiv/ConvertKit). -->
-    <form class="signup" action="#TODO-newsletter-endpoint" method="post" onsubmit="event.preventDefault();this.querySelector('.msg').textContent='Signup not live yet (TODO: newsletter provider).'">
-      <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
-      <button class="btn" type="submit">Subscribe</button>
-      <span class="msg muted"></span>
-      <span class="todo">TODO: form not connected. Pick a newsletter provider.</span>
-    </form>
+    <div class="signup">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="f25cc222-c078-4d71-a2e4-caf152352d92"></script>
+      <p class="fallback muted">or <a href="https://stakewatch.beehiiv.com/subscribe" target="_blank" rel="noopener">subscribe at stakewatch.beehiiv.com</a></p>
+    </div>
   </section>
 
   <!-- 6. Activity -->
@@ -178,8 +175,9 @@
 
 <footer class="wrap foot">
   <p><b>Not financial advice.</b> StakeWatch is an independent tracker and is not affiliated with Chainlink Labs or stake.link. Data comes from Ethereum mainnet via free public RPCs, plus DefiLlama and CoinGecko. It may be delayed or wrong. Cohort and forecast figures are heuristics. Verify on-chain before acting.</p>
-  <p class="muted">Community pool <a href="https://etherscan.io/address/0xBc10f2E862ED4502144c7d632a3459F49DFCDB5e" target="_blank" rel="noopener">0xBc10f2E8…DFCDB5e</a> · data block <span id="blk">–</span> · <a href="data/latest.json">raw JSON</a></p>
+  <p class="muted">Community pool <a href="https://etherscan.io/address/0xBc10f2E862ED4502144c7d632a3459F49DFCDB5e" target="_blank" rel="noopener">0xBc10f2E8…DFCDB5e</a> · data block <span id="blk">–</span> · <a href="data/latest.json">raw JSON</a> · <a href="https://x.com/cbyarborough" target="_blank" rel="noopener">Follow @cbyarborough on X</a></p>
 </footer>
 <script src="assets/app.js" defer></script>
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>
 </html>

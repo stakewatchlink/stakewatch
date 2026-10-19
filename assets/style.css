@@ -45,7 +45,7 @@ details{border-top:1px solid var(--line);padding:10px 0}details summary{cursor:p
 .pill.Staked{background:#2fd28b22;color:var(--ok)}.pill.Unstaked{background:#ff5d6c22;color:var(--bad)}.pill.UnbondingPeriodStarted{background:#ffb54722;color:var(--warn)}.pill.UnbondingPeriodReset{background:#5b7cff22;color:var(--acc2)}
 .pill.coh{background:#4a556844;color:#aab4c5}
 .alerts{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:center;background:linear-gradient(135deg,#16224a,#121826)}
-.signup{display:flex;flex-wrap:wrap;gap:8px}.signup input{flex:1;min-width:200px;background:#0b0f17;border:1px solid var(--line);border-radius:9px;color:var(--txt);padding:10px 12px;font-size:15px}
+.signup{display:flex;flex-direction:column;gap:8px;min-width:0}.signup iframe{max-width:100%}.fallback{font-size:13px;margin:0}.signup input{flex:1;min-width:200px;background:#0b0f17;border:1px solid var(--line);border-radius:9px;color:var(--txt);padding:10px 12px;font-size:15px}
 .signup .msg{width:100%;font-size:13px}.todo{width:100%;font-size:11px;color:var(--warn);border:1px dashed var(--warn);border-radius:6px;padding:3px 8px}
 .tag{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--mut)}
 .sponsor .ph{border:1px dashed var(--line);border-radius:10px;padding:26px;text-align:center;margin-top:8px;font-weight:600}.disc{font-size:11px;color:var(--mut)}

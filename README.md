@@ -7,7 +7,7 @@ The pool is full, and freed space is re-staked within seconds. The site shows wh
 * How fast openings get taken (30-day median and p90 refill time, LINK withdrawn vs re-staked)
 * Weekly unlock forecast, shown with and without the rolling 15,000-LINK cohort
 * Your realistic options: wait for a direct spot, stLINK, or hold
-* Weekly report and big-unlock alert signup (placeholder)
+* Weekly report and big-unlock alert signup (beehiiv embed, fallback https://stakewatch.beehiiv.com/subscribe)
 
 ## Layout
 ```
@@ -64,7 +64,6 @@ Local cron alternative:
 ```
 
 ## TODO before launch
-* Newsletter provider for the weekly report form (`#TODO-newsletter-endpoint`)
 * Sponsor slot, Ledger affiliate URL (`#TODO-ledger-affiliate-link`)
 * The direct reward rate (4.32%) is a manual reference
 
