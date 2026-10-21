@@ -130,6 +130,47 @@
     <p class="note">*Simple illustration at today's rates, before gas and price changes. Rates change. LINK price: <b id="link-px">–</b>. The direct rate is a manual reference from staking.chain.link.</p>
   </section>
 
+  <!-- 4b. Returns calculator -->
+  <section id="calc" class="card">
+    <div class="h"><h2>Estimated returns calculator</h2><span class="muted">illustration only, not a promise or advice</span></div>
+    <div class="calc-grid">
+      <label>LINK to stake<input id="c-amt" type="number" value="1000" min="1" max="15000" step="1"></label>
+      <label>Rate source<select id="c-src"><option value="direct">Direct community staking</option><option value="stlink">stake.link stLINK (30-day APY)</option></select></label>
+      <label>Months<input id="c-mo" type="number" value="12" min="1" max="60" step="1"></label>
+      <label>Gas for stake + claim txs (USD, your guess)<input id="c-gas" type="number" value="15" min="0" step="1"></label>
+      <label>Outside fee, % of rewards (exchange/custodian; 0 if direct)<input id="c-fee" type="number" value="0" min="0" max="100" step="0.5"></label>
+    </div>
+    <div id="c-out" class="calc-out muted">Loading live data…</div>
+    <p class="note"><b>Assumptions, plainly:</b> uses the rate in StakeWatch's live data (<span id="c-rsrc">–</span>) and today's LINK price held flat (it won't be). Rates are variable and change with pool fill and reward funding. Simple, non-compounding. The community rate is already after the automatic 4% delegation to node operators. Gas is your own estimate; Chainlink's interface needs ETH for every transaction. Rewards ramp up over 90 days: before that, part is "locked", and fully unstaking resets the ramp-up and forfeits locked rewards. The community pool is currently <span id="c-full">–</span>, so a direct stake is only possible when space opens. Not financial advice.</p>
+  </section>
+
+  <!-- 4c. Slashing & waits -->
+  <section id="risk" class="card">
+    <div class="h"><h2>Slashing &amp; unstaking waits, in plain English</h2><span class="muted">Staking v0.2, per official Chainlink FAQ</span></div>
+    <ul class="plain">
+      <li><b>Community stakers can't be slashed in v0.2.</b> Chainlink says changing that would require a migration to a new staking version, which you'd have to opt into manually.</li>
+      <li><b>Only node operators are at risk.</b> Operators serving the ETH/USD Data Feed on Ethereum (the service secured at launch) lose <b>700 LINK each</b> if a valid alert is raised. Operators serving only unsecured services aren't at risk.</li>
+      <li><b>What counts as a valid alert:</b> more than 3 hours since the last valid on-chain report for that feed. Node operators get 20 minutes of priority to alert; then community stakers can. A valid alerter earns <b>7,000 LINK</b>.</li>
+      <li><b>Rules can change, with warning.</b> Security-critical config changes and upgrades go through a timelock (the most critical take longer than the unbonding period), so stakers can exit first. Emergency functions meant to protect stakers and ministerial ones like adding rewards skip the delay.</li>
+      <li><b>Unstaking isn't instant.</b> Starting an unstake begins a <b id="r-cool">28-day</b> cooldown. Then there's a <b id="r-claim">7-day</b> claim window to withdraw. Miss it and your LINK simply stays staked; you'd have to start the cooldown again. Rewards keep accruing during both.</li>
+      <li><b>The real cost is rewards, not principal.</b> Completing an unstake resets your 90-day ramp-up and forfeits any still-locked rewards. Claiming already-claimable rewards doesn't.</li>
+      <li><b>Other risks still apply:</b> smart-contract risk, LINK price swings, and the extra risks of any third-party or liquid-staking service.</li>
+    </ul>
+    <p class="note">Source: <a href="https://chain.link/economics/staking" target="_blank" rel="noopener">chain.link/economics/staking</a> FAQ ("Can my staked LINK be slashed?", "How do I raise an alert in v0.2?", "Can I unstake my LINK in v0.2?", "Can the v0.2 contracts be upgraded?"). Wait periods above are read live from the pool contract.</p>
+  </section>
+
+  <!-- 4d. Pro teaser -->
+  <section id="pro" class="card pro">
+    <div class="h"><h2>StakeWatch Pro</h2><span class="tag">coming soon</span></div>
+    <p class="muted">We're exploring a paid tier. Nothing to buy yet, and no price set. Ideas on the list:</p>
+    <ul class="plain">
+      <li>Real-time X alerts when community pool space opens or large unlocks approach</li>
+      <li>Rate-change alerts for direct staking vs. stLINK</li>
+      <li>Early access to new metrics</li>
+    </ul>
+    <p class="note">Want to hear when it launches? The free weekly report below will announce it.</p>
+  </section>
+
   <!-- 5. Alerts -->
   <section id="alerts" class="card alerts">
     <div>
@@ -178,6 +219,7 @@
   <p class="muted">Community pool <a href="https://etherscan.io/address/0xBc10f2E862ED4502144c7d632a3459F49DFCDB5e" target="_blank" rel="noopener">0xBc10f2E8…DFCDB5e</a> · data block <span id="blk">–</span> · <a href="data/latest.json">raw JSON</a> · <a href="https://x.com/cbyarborough" target="_blank" rel="noopener">Follow @cbyarborough on X</a></p>
 </footer>
 <script src="assets/app.js" defer></script>
+<script src="assets/extras.js" defer></script>
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>
 </html>
