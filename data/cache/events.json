@@ -2477,5 +2477,13 @@
 {"name":"UnbondingPeriodStarted","block":26326570,"tx":"0x1854091c92e3d6335b939fc4eaed47a7a6a0b1d58181722e637ea30c43b38721","logIndex":697,"staker":"0x83FF5361b5DF32E74473F1193F64BD780C96ae5A"},
 {"name":"UnbondingPeriodStarted","block":26331135,"tx":"0x5717b9aa6064125c51265c1afb80ac64fd4b0f26124efcd1b8ad0075892bc06f","logIndex":322,"staker":"0x4156b4247C32DDeD27A714b819B36D675C989909"},
 {"name":"UnbondingPeriodStarted","block":26331159,"tx":"0xd0ddaf52c2fd0e12700810b4e1c611dfb20deae390af69e7e4409c20f834d227","logIndex":309,"staker":"0xe702FB9BB3a655E30183d9776F77F932b177eF7d"},
-{"name":"UnbondingPeriodStarted","block":26331223,"tx":"0x58da385c424d1a2bde7d12bb11f6ae7863da9c7a12834bd8edbe56a937a8ddf7","logIndex":526,"staker":"0xaD1CB584e6a5D7Da112Ac0a42caE729F4E6abb68"}
+{"name":"UnbondingPeriodStarted","block":26331223,"tx":"0x58da385c424d1a2bde7d12bb11f6ae7863da9c7a12834bd8edbe56a937a8ddf7","logIndex":526,"staker":"0xaD1CB584e6a5D7Da112Ac0a42caE729F4E6abb68"},
+{"name":"UnbondingPeriodStarted","block":26331283,"tx":"0x5980c88c5020eddf0f4076cdd27f5f847b484a6c9eca22111ef6bf9fc015785a","logIndex":848,"staker":"0x8dA523664F5337e15A321355880fa2cd5de20A5E"},
+{"name":"UnbondingPeriodStarted","block":26331343,"tx":"0x8a65e044be06e4256bdc1464c2435d3b49d5ea8a481d5070e3b3add7b222173a","logIndex":2126,"staker":"0xd826e4731595B903a9C901eF97c73700955a4403"},
+{"name":"UnbondingPeriodStarted","block":26331370,"tx":"0x5a79cc28e1091ad642ebbdab559e7f91e97ef292ffb746db29b648ad132ebdef","logIndex":1357,"staker":"0xcB0AeC519B842A7783f86787B17E4Dc6d9433d65"},
+{"name":"UnbondingPeriodStarted","block":26331373,"tx":"0xe35642121f46d26026432e4830a4e3ac8ae234fe9bd556749979d33dfd28cdbb","logIndex":127,"staker":"0xfeE36758Df785735d32f635220D523D7fdb75772"},
+{"name":"UnbondingPeriodStarted","block":26331415,"tx":"0x1bbd6ea9d330e407100f32508a054a866876bec9650b5e35f3a6607c420089fd","logIndex":97,"staker":"0x4099330553f51BFD00a482624F8e2DA38B5d1748"},
+{"name":"UnbondingPeriodStarted","block":26331476,"tx":"0x0f5f99f233c851006a90813e8b755739604b9003f4e6341fc361bba3fe65549d","logIndex":39,"staker":"0x31CEa9F1cEF65523A37fAe9e175367bC09EcFc01"},
+{"name":"UnbondingPeriodStarted","block":26331524,"tx":"0x2e77d08d85a80bd9c4662b9a72d247e97206afb6f8e54934330e569505d3200c","logIndex":264,"staker":"0x1163D119d3BB40b5B225E4c03118Ba04F408C329"},
+{"name":"UnbondingPeriodStarted","block":26331538,"tx":"0xc1302bda9471256b8cbc1d6ad67e0ac8adbc79ab4625c416f5884964c22687dc","logIndex":991,"staker":"0x66697EdA3D55920769dbc721EaE2Be1c934Ea706"}
 ]
