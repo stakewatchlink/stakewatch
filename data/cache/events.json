@@ -2496,5 +2496,6 @@
 {"name":"UnbondingPeriodStarted","block":26335591,"tx":"0xbddefdeb0ed78ff15ddce8da5bd5864090d336abfe9f054cb8e1a95af82ba771","logIndex":398,"staker":"0x20051A00C2116bF74124F2E4EcCa788324cb534A"},
 {"name":"Unstaked","block":26335883,"tx":"0x8608bc772d5d34c47d01e42d59ac79c3c432d04eded6b68be93cc500d02cdafe","logIndex":553,"staker":"0xF73636647616A29923cAF3Bd2e6fE4B7b462c22e","amount":320.409629,"newStake":0,"newTotalPrincipal":40874679.590371},
 {"name":"Staked","block":26335884,"tx":"0x194baabc9f9104365d57117949c7208f7b794ea9f8d4811fda5695d8ceaeb654","logIndex":14,"staker":"0x5474D4DE11e60BFC843404dc1b5DC1AEF7776DDa","amount":320.409629,"newStake":13589.26414709098,"newTotalPrincipal":40875000},
-{"name":"UnbondingPeriodStarted","block":26336067,"tx":"0xd7cbf0ce66f626e14b10c2b059d346359a707a09da5730ace96568561cd2db3b","logIndex":585,"staker":"0x2Df83BC94Be72aDc2dF63658c7d3f4e0cD67997E"}
+{"name":"UnbondingPeriodStarted","block":26336067,"tx":"0xd7cbf0ce66f626e14b10c2b059d346359a707a09da5730ace96568561cd2db3b","logIndex":585,"staker":"0x2Df83BC94Be72aDc2dF63658c7d3f4e0cD67997E"},
+{"name":"UnbondingPeriodStarted","block":26337018,"tx":"0x60ad6f992ad39b45fb7b8e34b95a37046d751bb7d1d2a5aa948f9756ebd16347","logIndex":23,"staker":"0x98641042a57a6140a6E65D828b8a487Ca435EFc0"}
 ]
