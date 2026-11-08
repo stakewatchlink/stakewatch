@@ -2634,5 +2634,9 @@
 {"name":"UnbondingPeriodStarted","block":26364971,"tx":"0x8d71d21dd6ae2b07675da89151a74d08a0a7156263182ec3a6d58e9021037d88","logIndex":297,"staker":"0xd31daC5Aff0CDAae1e86ddCb9d8Dad281D641b0D"},
 {"name":"Unstaked","block":26368317,"tx":"0xf456f2ee2aa1ddbd5cc16730aae743429bc400093804d1cc364648997b38e7e3","logIndex":299,"staker":"0x979C9e5337fe026Aa67EF7B78c72757B70Df50B8","amount":313.94076947328,"newStake":0,"newTotalPrincipal":40874686.05923053},
 {"name":"Staked","block":26368318,"tx":"0x91593b175a72c64309fdd97ae4f9a1c8ced854d56b6cd513b8eac5705baaccac","logIndex":44,"staker":"0xd8d0FE3Aea7095D7b063F8f260a1Ae83339447a6","amount":16.023187955769743,"newStake":456.63260160054665,"newTotalPrincipal":40874702.08241848},
-{"name":"Staked","block":26368318,"tx":"0xdc80f31eca8d4574940ef41db2edf2eec1912fbb66078231b3fc932cdf480a66","logIndex":52,"staker":"0xCe298114B82E0e7A90eFC291f4E7108896C24183","amount":297.91758151751026,"newStake":1012.0266614473726,"newTotalPrincipal":40875000}
+{"name":"Staked","block":26368318,"tx":"0xdc80f31eca8d4574940ef41db2edf2eec1912fbb66078231b3fc932cdf480a66","logIndex":52,"staker":"0xCe298114B82E0e7A90eFC291f4E7108896C24183","amount":297.91758151751026,"newStake":1012.0266614473726,"newTotalPrincipal":40875000},
+{"name":"UnbondingPeriodStarted","block":26369767,"tx":"0x0450d6694cee47004e080c68791fb0068497e2b3d1fd31c527d8ba021e2a5b36","logIndex":119,"staker":"0xCF986Ca25cb97Be8E252bCEb271024fDEbFb5095"},
+{"name":"UnbondingPeriodStarted","block":26369773,"tx":"0xffa6f8f06aeb504637f7c8308912c0f9e5e94443d2b5e816f3fbd1cfe5f231ae","logIndex":244,"staker":"0x593cf538D42DbCB3B3D1c570FD89d53986359454"},
+{"name":"UnbondingPeriodStarted","block":26369780,"tx":"0xcfccb025c734598489f90307e8c9e3fe4d53624ecdec05cffd35fc4a089c692a","logIndex":365,"staker":"0x135f1bc109B9c14361A0c88d078effc1244DAdEc"},
+{"name":"UnbondingPeriodStarted","block":26369785,"tx":"0x492ead1b670b74de2ea3ae505aa22ee2b37ac5ecbfe1df3cd53ce1a955d1c317","logIndex":102,"staker":"0x708f002A6A02502516CbBBD2f0B48Ea7471b45e8"}
 ]
